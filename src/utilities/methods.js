@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft. All rights reserved.
 
 import Config from 'app.config';
-import mapObj from 'map-obj';
 import toCamelcase from 'camelcase';
 import dot from 'dot-object';
 
@@ -38,7 +37,11 @@ export const camelCaseKeys = (data) => {
   if (Array.isArray(data)) {
     return data.map(camelCaseKeys);
   } else if (data !== null && isObject(data)) {
-    return mapObj(data, (key, value) => [toCamelcase(key), camelCaseKeys(value)]);
+    return Object.entries(data)
+      .reduce((acc, [key, value]) => {
+        acc[toCamelcase(key)] = camelCaseKeys(value);
+        return acc;
+      }, {});
   }
   return data;
 };
