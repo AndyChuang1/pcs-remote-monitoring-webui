@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft. All rights reserved.
 
 import Config from 'app.config';
-import toCamelcase from 'camelcase';
 import dot from 'dot-object';
+import toCamelcase from './camelcase';
 
 /** Tests if a value is a function */
 export const isFunc = value => typeof value === 'function';
